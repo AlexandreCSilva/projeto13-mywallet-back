@@ -1,19 +1,25 @@
 import { db } from '../database/db.js';
+import bcrypt from 'bcrypt';
 
 async function postRegister(req, res) {
-    console.log(req.body)
-    const { name, email, password, repeatPassword } = req.body;
+    
+    const { email, password } = req.body;
 
     try {
 
         const user = await db.collection('users').findOne({ email });
 
         if (user) {
-            res.sendStatus(409);
+            return res.sendStatus(409);
         }
 
-        
-        
+        const passwordHash = bcrypt.hashSync(password, 10);
+
+        delete req.body.password;
+        delete req.body.repeatPassword;
+
+        await db.collection('users').insertOne({...req.body, password: passwordHash})
+
         res.sendStatus(201);
     } catch (err) {
         console.error(err);
