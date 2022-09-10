@@ -13,4 +13,4 @@ try {
 
 const db = mongoClient.db('MyWallet');
 
-export default db;
+export { db };
