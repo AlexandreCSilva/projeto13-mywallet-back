@@ -1,7 +1,7 @@
 import { db } from '../database/db.js';
 import bcrypt from 'bcrypt';
 
-async function postRegister(req, res) {
+async function signUp(req, res) {
     
     const { email, password } = req.body;
 
@@ -27,4 +27,4 @@ async function postRegister(req, res) {
     }
 }
 
-export { postRegister };
+export { signUp };

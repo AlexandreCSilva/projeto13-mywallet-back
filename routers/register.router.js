@@ -1,11 +1,11 @@
 import express from 'express';
-import { postRegister } from '../controllers/register.controller.js';
-import { validateRegister } from '../middlewares/registerValidationMiddleware.js';
+import { signUp } from '../controllers/register.controller.js';
+import { validateRegister } from '../middlewares/registerValidation.js';
 
 const router = express.Router();
 
 router.use(validateRegister);
 
-router.post('/register', postRegister);
+router.post('/sign-up', signUp);
 
 export default router;
