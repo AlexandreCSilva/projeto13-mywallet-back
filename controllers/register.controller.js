@@ -1,7 +1,8 @@
 import { db } from '../database/db.js';
 
 async function postRegister(req, res) {
-    const { name, email, password, confirmation } = req.body;
+    console.log(req.body)
+    const { name, email, password, repeatPassword } = req.body;
 
     try {
 
@@ -10,6 +11,8 @@ async function postRegister(req, res) {
         if (user) {
             res.sendStatus(409);
         }
+
+        
         
         res.sendStatus(201);
     } catch (err) {
