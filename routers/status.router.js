@@ -3,6 +3,6 @@ import { status } from "../controllers/status.controller.js";
 
 const router = express.Router();
 
-router.get('/status', status);
+router.post('/status', status);
 
 export default router;

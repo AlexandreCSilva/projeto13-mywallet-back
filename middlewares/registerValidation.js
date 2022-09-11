@@ -7,6 +7,7 @@ const schemaRegister = joi.object({
     name: joi.string()
         .alphanum()
         .min(1)
+        .max(20)
         .required(),
 
     password: joiPassword

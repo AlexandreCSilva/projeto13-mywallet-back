@@ -6,7 +6,6 @@ async function signUp(req, res) {
     const { email, password } = req.body;
 
     try {
-
         const user = await db.collection('users').findOne({ email });
 
         if (user) {

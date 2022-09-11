@@ -16,16 +16,14 @@ async function status(req, res) {
             return res.sendStatus(404);;
         }
 
-        const updatedStatus = await db.collection('sessions').updateOne({ token }, { $set: { lastStatus: dayjs() }});
-        console.log(session)
+        await db.collection('sessions').updateOne({ token }, { $set: { lastStatus: dayjs() }});
 
         return  res.sendStatus(200);
     
-      } catch (error) {
-        console.error(error);
-        res.sendStatus(500);
-      }
-  
+        } catch (error) {
+            console.error(error);
+            res.sendStatus(500);
+        }
 }
 
 export { status };
