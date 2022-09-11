@@ -18,7 +18,7 @@ const schemaRegister = joi.object({
         .noWhiteSpaces()
         .required(),
 
-    repeatPassword: joi.any().equal(joi.ref('password'))
+    confirmPassword: joi.any().equal(joi.ref('password'))
         .required()
         .label('Confirm password')
         .options({ messages: { 'any.only': '{{#label}} does not match'} }),
