@@ -6,6 +6,7 @@ async function status(req, res) {
 
     try {
         const session = await db.collection('sessions').findOne({ token });
+        
         if (!session) {
           return res.sendStatus(404);
         }
