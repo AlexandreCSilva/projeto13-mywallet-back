@@ -6,7 +6,6 @@ const schemaBalance = joi.object({
         .required(),
 
     description: joi.string()
-        .alphanum()
         .min(1)
         .max(20)
         .required()

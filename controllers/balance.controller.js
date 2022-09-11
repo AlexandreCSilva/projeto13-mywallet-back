@@ -6,12 +6,6 @@ async function postBalance(req, res) {
     const { value, description } = req.body;
 
     try {
-        const user = await db.collection('users').find({ token });
-
-        if (!user) {
-            return res.sendStatus(404);
-        }
-
         await db.collection('balances').insertOne({ value, description, time: dayjs().format("DD/MM"), token })
 
         res.sendStatus(201);
@@ -21,4 +15,27 @@ async function postBalance(req, res) {
     }
 }
 
-export { postBalance };
+async function getBalance(req, res) {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+
+    try {
+        const userBalance = await db.collection('balances').find({ token }).toArray();
+
+        if (!userBalance) {
+            return res.sendStatus(404);
+        }
+        userBalance.forEach((balance) => {
+            delete balance._id;
+            delete balance.token;
+        })
+        
+
+        console.log(userBalance)
+        res.sendStatus(201);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+}
+
+export { postBalance, getBalance };
