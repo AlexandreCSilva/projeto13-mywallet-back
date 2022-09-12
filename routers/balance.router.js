@@ -4,9 +4,7 @@ import { validateBalance } from '../middlewares/balanceValidation.js';
 
 const router = express.Router();
 
-router.use(validateBalance);
-
-router.post('/balance', postBalance);
+router.post('/balance', validateBalance, postBalance);
 router.get('/balance', getBalance);
 
 export default router;

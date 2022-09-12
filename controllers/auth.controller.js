@@ -13,13 +13,13 @@ async function signIn(req, res) {
         if (user && passwordIsValid) {
             const token = uuid();
             
-            await db.collection("sessions").insertOne({
+            const seila = await db.collection("sessions").insertOne({
                 token,
+                name: user.name,
                 lastStatus: dayjs()
             })
-
-            return res.status(201).send(token);
-
+            
+            return res.status(201).send({token, name: user.name});
         } 
     } catch (err) {
         console.error(err);

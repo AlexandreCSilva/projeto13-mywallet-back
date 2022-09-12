@@ -4,8 +4,6 @@ import { validateLogin } from '../middlewares/loginValidation.js';
 
 const router = express.Router();
 
-router.use(validateLogin);
-
-router.post('/sign-in', signIn);
+router.post('/sign-in', validateLogin, signIn);
 
 export default router;

@@ -9,6 +9,7 @@ const schemaBalance = joi.object({
         .min(1)
         .max(20)
         .required(),
+
     positive: joi.boolean()
         .required()
 })

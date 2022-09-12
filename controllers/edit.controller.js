@@ -1,9 +1,11 @@
 import { db } from '../database/db.js';
 import mongoose from 'mongoose';
+import dayjs from 'dayjs';
 
-async function deleteBalance(req, res) {
+async function postEdit(req, res) {
     const token = req.headers.authorization?.replace('Bearer ', '');
-    const { balanceId } = req.params; 
+    const balanceId = req.headers.balanceid;
+    const { value, description, positive } = req.body;
 
     try {
         const session = await db.collection('sessions').findOne({ token });
@@ -17,9 +19,9 @@ async function deleteBalance(req, res) {
         if (!balance) {
             return res.sendStatus(404);
         }
-
-        await db.collection('balances').deleteOne({ _id: mongoose.Types.ObjectId(balanceId) });
-
+        
+        await db.collection('balances').updateOne({ _id: mongoose.Types.ObjectId(balanceId) }, { $set: { value: value, description: description, positive: positive, lastStatus: dayjs() }});
+        
         res.sendStatus(201);
     } catch (err) {
         console.error(err);
@@ -27,4 +29,4 @@ async function deleteBalance(req, res) {
     }
 }
 
-export { deleteBalance };
+export { postEdit };
