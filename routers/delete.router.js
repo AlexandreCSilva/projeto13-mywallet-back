@@ -3,6 +3,6 @@ import { deleteBalance } from '../controllers/delete.controller.js';
 
 const router = express.Router();
 
-router.delete('/balance/:balanceId', deleteBalance);
+router.delete('/balance', deleteBalance);
 
 export default router;

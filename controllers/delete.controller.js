@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 async function deleteBalance(req, res) {
     const token = req.headers.authorization?.replace('Bearer ', '');
-    const { balanceId } = req.params; 
+    const balanceId = req.headers.balanceid;
 
     try {
         const session = await db.collection('sessions').findOne({ token });
